@@ -29,9 +29,12 @@ export default function PokemonSearch() {
   return (
     <section className='pokemon'>
       {/* make the fetch on submit */}
-      <form>
-            Search pokemon for a city
-        {/* add inputs/labels for city name, state, and country, using all the things we need with react forms. Don't forget to use the value property to sync these up with the default values in react state */}
+      <form onSubmit={handlePokemonSubmit}>
+            Search pokemon for a name
+        {/* add inputs/labels for name, using all the things we need with react forms. Don't forget to use the value property to sync these up with the default values in react state */}
+        <input onChange={e => setSearch(e.target.value)} />
+        <select onChange={e => setSearchByName(e.target.value)} />
+        <option value='pokemon'>Search By Name</option>
         <button>Get pokemon</button>
       </form>
       {/* Make a PokemonList component to import and use here. Use a ternery to display a loading spinner (make a <Spinner /> component for this) if the data is still loading. */}
