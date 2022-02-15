@@ -6,9 +6,9 @@ exports.handler = async (event, context) => {
   try {
     // grab the pokemon's name from the request's query parameters
     const response = await fetch(`https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${event.queryStringParameters.search}`);
-    console.log(response);
+    
     const json = await response.json();
-
+    console.log(json);
     // here is an example from the netlify docs:
     // https://functions.netlify.com/playground/#hello%2C-%7Bname%7D 
     
