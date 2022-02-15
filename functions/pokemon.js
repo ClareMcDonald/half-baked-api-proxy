@@ -8,7 +8,7 @@ exports.handler = async (event, context) => {
     const response = await fetch(`https://pokedex-alchemy.herokuapp.com/api/pokedex?pokemon=${event.queryStringParameters.search}`);
     
     const json = await response.json();
-    console.log(json);
+  
     // here is an example from the netlify docs:
     // https://functions.netlify.com/playground/#hello%2C-%7Bname%7D 
     
@@ -21,7 +21,7 @@ exports.handler = async (event, context) => {
       body: JSON.stringify(json.results),
     };
   } catch (error) {
-    console.log(error);
+
     return {
       statusCode: 500,
       body: JSON.stringify({ error: 'Failed fetching data' }),
