@@ -7,7 +7,7 @@ function parseTime(dt) {
 export default function ForecastList({ weather }) {
   return (
     <div>
-      {weather.map((weatherItem, i) => <div key={weatherItem + i}>
+      {weather.map((weatherItem, i) => <div className="weather-item" key={weatherItem.dt + i}>
         <h3>Date: {parseTime(weatherItem.dt)}</h3>
         <p>Clouds: {weatherItem.clouds}</p>
         <p>Humidity: {weatherItem.humidity}</p>

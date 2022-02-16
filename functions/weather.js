@@ -14,7 +14,7 @@ exports.handler = async (event, context) => {
     // consult the yelp docs to figure out how to use a city, state, and country to make a request and get the latitude and longitude
     // https://openweathermap.org/api/geocoding-api
 
-    const geoCodingResponse = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city},${state}, ${country}&limit={limit}&appid=${process.env.WEATHER_API_KEY}`);
+    const geoCodingResponse = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&limit=1&appid=${process.env.WEATHER_API_KEY}`);
 
     const geoCodingJson = await geoCodingResponse.json();
 
@@ -25,7 +25,7 @@ exports.handler = async (event, context) => {
     // once you have gotten the lat/lon using the geocoding api, use the lat/lon to get the weather. Consult the docs below:
     // https://openweathermap.org/api/one-call-api
 
-    const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude={part}&appid=${process.env.WEATHER_API_KEY}`);
+    const weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${process.env.WEATHER_API_KEY}`);
 
     const weatherJson = await weatherResponse.json();
 
