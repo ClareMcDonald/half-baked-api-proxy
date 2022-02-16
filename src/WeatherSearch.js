@@ -25,7 +25,7 @@ export default function WeatherSearch() {
       setLoading(false);
         
     } catch (e) {
-      // eslint-disable-next-line;
+      // eslint-disable-next-line
       console.error(e);
     }
   }    
