@@ -5,14 +5,23 @@ export default function YelpSearch() {
   const [businesses, setBusinesses] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchLocation, setSearchLocation] = useState('portland or usa');
-  
+
   async function handleYelpSubmit(e) {
     e.preventDefault();
   
+    try {
     // set the loading state to true
+      setLoading(true);
+
     // use fetch to make a request to your netlify yelp function. Be sure to pass the search query as a query param in the URL
-  
+      const json = await fetch(`/.netlify/functions/yelp?search=${searchLocation}`);
+
     // put the jsonified data in state and set the loading state to false
+      setBusinesses(json);
+      
+    } catch (e) {
+      console.error(e);
+    }
   }
   
   return (
