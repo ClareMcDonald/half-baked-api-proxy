@@ -1,10 +1,15 @@
-const request = require('superagent');
+const fetch = require('node-fetch');
 
 require('dotenv').config();
 
 exports.handler = async (event, context) => {
   try {
     // grab the city, state, and country from the request's query parameters
+    const response = await fetch(`https://api.yelp.com/v3/businesses/search?location=${event.queryStringParameters.search}`, {
+      headers: {
+        Authorization: `Bearer ${process.env.YELP_API_KEY}`
+      }
+    });
     // here is an example from the netlify docs:
     // https://functions.netlify.com/playground/#hello%2C-%7Bname%7D 
 

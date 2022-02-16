@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import BusinessesList from './BusinessesList';
+import Spinner from './Spinner';
 
 export default function YelpSearch() {
-    // you'll need to track your yelp search results, the loading state, and a form field for location with a default value.
+  // you'll need to track your yelp search results, the loading state, and a form field for location with a default value.
   const [businesses, setBusinesses] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchLocation, setSearchLocation] = useState('portland or usa');
@@ -10,15 +12,15 @@ export default function YelpSearch() {
     e.preventDefault();
   
     try {
-    // set the loading state to true
+      // set the loading state to true
       setLoading(true);
 
-    // use fetch to make a request to your netlify yelp function. Be sure to pass the search query as a query param in the URL
+      // use fetch to make a request to your netlify yelp function. Be sure to pass the search query as a query param in the URL
       const json = await fetch(`/.netlify/functions/yelp?search=${searchLocation}`);
 
-    // put the jsonified data in state and set the loading state to false
+      // put the jsonified data in state and set the loading state to false
       setBusinesses(json);
-      
+
     } catch (e) {
       console.error(e);
     }
@@ -27,12 +29,19 @@ export default function YelpSearch() {
   return (
     <section className='yelp'>
       {/* make the fetch on submit */}
-      <form>
+      <form onSubmit={handleYelpSubmit}>
         Search yelp for a city
         {/* add inputs/labels for city name, state, and country, using all the things we need with react forms. Don't forget to use the value property to sync these up with the default values in react state */}
-        <button>Search yelp</button>
+        <label> City State Country
+          <input onChange={e => setSearchLocation(e.target.value)} value={searchLocation} />
+        </label>
+        <button>Search Businesses</button>
       </form>
       {/* Make a BusinessesList component to import and use here. Use a ternery to display a loading spinner (make a <Spinner /> component for this) if the data is still loading. */}
+      {!loading
+        ? < BusinessesList businesses={businesses}/>
+        : <Spinner />
+      }
     </section>
   );
 }
