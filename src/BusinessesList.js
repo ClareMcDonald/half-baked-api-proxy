@@ -4,7 +4,7 @@ export default function BusinessesList({ businesses }) {
   return (
     <div>
       {businesses.map((business, i) => <div key={business + i}>
-        <h3>{business.name}</h3>
+        <h3>Name: {business.name}</h3>
         <img src={business.image_url} />
         <p>Rating: {business.rating}</p>
         <p>Price: {business.price}</p>
